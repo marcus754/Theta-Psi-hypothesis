@@ -1,0 +1,8 @@
+{
+  "z_surface": 25.0,
+  "sigma_z_surface": 12.5,
+  "delay_proxy": 250.0,
+  "sigma_delay_proxy": 125.0,
+  "n_peak": 26.0,
+  "sigma_n_peak": 12.5
+}

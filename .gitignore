@@ -1,0 +1,28 @@
+# Python cache/artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Local virtual envs
+.venv/
+venv/
+env/
+
+# Build/output artifacts
+results/
+tmp/
+_markdown_docs_compiled/
+
+# LaTeX/PDF intermediates
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# Notebook checkpoints
+.ipynb_checkpoints/

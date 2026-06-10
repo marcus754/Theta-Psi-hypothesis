@@ -1,0 +1,9 @@
+{
+  "theta_c_scale": 3.0000000000000004,
+  "m2_scale": 999.9999999999998,
+  "lam_scale": 0.10000000000000002,
+  "calibrated_chi2_proxy": 22.462461813423516,
+  "reg_strength": 0.2,
+  "calibration_gamma": 0.0020339622,
+  "calibration_V0": 0.012364227
+}

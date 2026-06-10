@@ -1,0 +1,48 @@
+{
+  "entries": [
+    {
+      "name": "eht_m87_shadow_inferred_z_lower",
+      "type": "lower",
+      "observable": "z_surface",
+      "value": 180.0,
+      "sigma": 90.0,
+      "source": "EHT Collaboration 2019, ApJL 875 L1",
+      "source_url": "https://iopscience.iop.org/article/10.3847/2041-8213/ab0ec7",
+      "observed_on": "2019-04-10",
+      "note": "Conservative inferred lower-bound proxy from resolved M87* ring morphology (42±3 uas) under no-horizon compact-star mapping."
+    },
+    {
+      "name": "eht_sgra_shadow_inferred_z_lower",
+      "type": "lower",
+      "observable": "z_surface",
+      "value": 220.0,
+      "sigma": 80.0,
+      "source": "EHT Collaboration 2022, ApJL 930 L12/L15",
+      "source_url": "https://iopscience.iop.org/article/10.3847/2041-8213/ac6674",
+      "observed_on": "2022-05-12",
+      "note": "Conservative inferred lower-bound proxy from Sgr A* ring diameter (51.8±2.3 uas) under no-horizon compact-star mapping."
+    },
+    {
+      "name": "lvk_gwtc3_no_echo_inferred_delay_lower",
+      "type": "lower",
+      "observable": "delay_proxy",
+      "value": 460.0,
+      "sigma": 160.0,
+      "source": "LVK Tests of GR with GWTC-3 (LIGO-P2100275)",
+      "source_url": "https://dcc.ligo.org/LIGO-P2100275/public",
+      "observed_on": "2022-04-28",
+      "note": "Inferred delay lower-bound proxy: absence of statistically significant post-merger echoes in O3 events."
+    },
+    {
+      "name": "eht_lvk_inferred_npeak_upper",
+      "type": "upper",
+      "observable": "n_peak",
+      "value": 300000.0,
+      "sigma": 100000.0,
+      "source": "EHT 2019/2022 + LVK GWTC-3 consistency envelope",
+      "source_url": "https://eventhorizontelescope.org/publications/first-sagittarius-event-horizon-telescope-results-i-shadow-supermassive-black-hole",
+      "observed_on": "2022-05-12",
+      "note": "Soft inferred upper barrier preventing runaway n_peak while remaining compatible with ring morphology and GW strong-field consistency."
+    }
+  ]
+}

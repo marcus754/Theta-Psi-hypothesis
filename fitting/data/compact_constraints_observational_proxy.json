@@ -1,0 +1,14 @@
+{
+  "mode": "constraints",
+  "z_surface_min": 220.0,
+  "sigma_z_surface_min": 80.0,
+  "delay_proxy_min": 460.0,
+  "sigma_delay_proxy_min": 160.0,
+  "n_peak_max": 300000.0,
+  "sigma_n_peak_max": 100000.0,
+  "provenance": {
+    "bounds_json": "fitting/data/strong_field_bounds_registry.json",
+    "n_entries": 4,
+    "method": "max lower / min upper aggregation"
+  }
+}

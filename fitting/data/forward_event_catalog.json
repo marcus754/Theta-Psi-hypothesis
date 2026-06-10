@@ -1,0 +1,22 @@
+{
+  "events": [
+    {
+      "name": "EHT_M87_ring",
+      "observable": "ring_uas",
+      "target": 42.0,
+      "sigma": 3.0,
+      "mass_msun": 6500000000.0,
+      "distance_m": 5.182e23,
+      "source": "EHT 2019"
+    },
+    {
+      "name": "EHT_SgrA_ring",
+      "observable": "ring_uas",
+      "target": 51.8,
+      "sigma": 2.3,
+      "mass_msun": 4297000.0,
+      "distance_m": 2.554e20,
+      "source": "EHT 2022"
+    }
+  ]
+}

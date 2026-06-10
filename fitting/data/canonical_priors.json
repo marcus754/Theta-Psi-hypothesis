@@ -1,0 +1,7 @@
+{
+  "gamma_min": 0.4,
+  "gamma_max": 8.5,
+  "V0_min": 0.24,
+  "V0_max": 0.40,
+  "Q_abs_max": 10.0
+}
