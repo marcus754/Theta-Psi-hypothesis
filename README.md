@@ -1,10 +1,35 @@
 # Θ-Ψ Hypothesis Repository
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14856485.svg)](https://doi.org/10.5281/zenodo.14856485)
+
+**Публикация:** [The Θ–Ψ Hypothesis: A Field-Based Model for Emergent Gravity and Quantum Effects](https://zenodo.org/records/14856485)
+
+## Сравнение предсказаний
+
+### Таблица 1. Соответствие (слабое поле)
+| Предмет                   | Тета-Пси               | ОТО и Стандартная модель |
+| :------------------------ | :--------------------- | :----------------------- |
+| Прецессия Меркурия        | 42.98 угл. сек за век  | 42.98 угл. сек за век    |
+| Отклонение света          | 1.75 угл. сек          | 1.75 угл. сек            |
+| Красное смещение          | 2.12 миллионных        | 2.12 миллионных          |
+| Задержка Шапиро           | 250 микросекунд        | 250 микросекунд          |
+| Скорость Грав. Волн (c_T) | Строго 1.000...        | Строго 1.000...          |
+
+### Таблица 2. Отличия (сильное поле и космология)
+| Предмет                   | Тета-Пси                        | ОТО и Лямбда-CDM          |
+| :------------------------ | :------------------------------ | :------------------------ |
+| Горизонт событий          | Нет (физическая поверхность)    | Есть (граница невозврата) |
+| Красное смещение z        | Конечное (около 10^10)          | Бесконечное               |
+| Эхо слияния (GW echoes)   | ~0.3 мс на 1 M_sun (2.5-4.0 мс) | 0 (сигнал поглощен)       |
+| Плотность в центре        | Конечная (без сингулярности)    | Бесконечная (сингулярность)|
+| Темная энергия (w)        | Переменная (от -0.95 до -1.05)  | Постоянная (строго -1.00)  |
+| Постоянная Планка (hbar)  | Выводится (квант заряда q0)     | Фундаментальный постулат  |
+
 ## Основные каталоги
 
 - `background/`, `checks/`, `fitting/`, `src/`, `theory/`: вычислительное ядро и проверки.
 - `observational/`: внешний слой сравнения с данными, falsifiability и validation.
-- `docs/`: основная документация гипотезы (`00...11`).
+- `docs/`: основная документация гипотезы (`00...16`).
 - `docs/notes/`: рабочие заметки, roadmap, статус, планы.
 - `tests/`: тесты.
 
@@ -15,7 +40,7 @@
 - `background/`
   FRW-модуль и редуцированная космологическая динамика
 - `checks/`
-  физические тесты и profile-level диагностика
+  физические тесты (Меркурий, PPN, стабильность) и profile-level диагностика
 - `fitting/`
   inference-слой: observables, likelihoods, MCMC, bridge через `fitting/core_api.py`
 - `observational/`
@@ -44,8 +69,15 @@ python scripts/entry_validate.py
 - сводные отчеты по шагам в `results/*.md`
 
 Классы шагов:
-- `empirical`: прямые data-facing проверки, которые входят в `falsifiability`.
-- `diagnostic`: proxy/scan/calibration шаги для внутренней отладки; они не считаются жёсткими критериями фальсификации.
+- `empirical`: прямые data-facing проверки (`prediction_suite`, `forward_event_scan`, `forward_event_report`, `joint_region_scan`, `falsifiability_check`).
+- `diagnostic`: proxy/scan/calibration шаги для внутренней отладки (`forward_observables_scan`, `likelihood_comparison`, `joint_strongfield_profile_scan`, `inverse_bao_fit`, `head2head_comparison`, `mercury_precession`); они не считаются жёсткими критериями фальсификации.
+
+Выборочная проверка Меркурия (прецессия и численный интегратор):
+
+```bash
+python scripts/run_mercury_precession_check.py
+python scripts/run_mercury_numeric_check.py
+```
 
 Параметрический фит (MCMC):
 
