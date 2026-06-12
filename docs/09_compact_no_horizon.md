@@ -3,57 +3,57 @@
 
 ## Канон времени
 
-- Фундаментальный объект времени в гипотезе: тензор `Θ_{μν}` (см. `docs/11_derivation_path.md`).
+- Фундаментальный объект времени в гипотезе: тензор Theta_munu (см. docs/11_derivation_path.md).
 - В формулах этого раздела используется редуцированная FRW-переменная
-  `θ ≡ θ_eff`, где `θ_eff^2 = Θ_{μν} u^μ u^ν`, `u^μ u_μ = -1`.
-- Все записи вида `n(θ)` в этом файле следует читать как `n(θ_eff, Θ, Ψ)`.
+  theta ≡ theta_eff, где theta_eff^2 = Theta_munu u^mu u^nu, u^mu u_mu = -1.
+- Все записи вида n(theta) в этом файле следует читать как n(theta_eff, Theta, Psi).
 - Этот раздел описывает вычислительный редуцированный контур, а не полную
-  тензорную динамику `Θ_{μν}`.
+  тензорную динамику Theta_munu.
 
 ## Каноническая постановка (обязательно для всех разделов)
 
-В проекте базой принимаются `Θ_{μν}` и `Ψ`; редуцированный контур не
+В проекте базой принимаются Theta_munu и Psi; редуцированный контур не
 требует внешнего порога и не использует ручное отсечение веток.
 
-```
-S = ∫ d^4x √(-g) [ (M_pl^2/2)R + L_m + L_{ΘΨ}
+
+S = ∫ d^4x √(-g) [ (M_pl^2/2)R + L_m + L_ThetaPsi
                    + M_*^4 F(J_refr) ],
-J_refr(Θ,Ψ)=Φ_eff(θ_eff)·I_grad(Θ,Ψ).
-```
+J_refr(Theta,Psi)=Phi_eff(theta_eff)·I_grad(Theta,Psi).
+
 
 Источник режима (без Weyl-порога в каноне):
 
-```
-I_grad(Θ,Ψ) = l_θ^2 · |∇_⊥θ|^2 + l_Ψ^2 · |∇_⊥Ψ|^2,
-∇_⊥ = пространственная часть градиента (ортогонально локальному u^μ).
-```
+
+I_grad(Theta,Psi) = l_theta^2 · |∇_⊥theta|^2 + l_Psi^2 · |∇_⊥Psi|^2,
+∇_⊥ = пространственная часть градиента (ортогонально локальному u^mu).
+
 
 Смысл:
-- В FRW (однородный фон): `I_grad=0`, поэтому `J_refr=0` и рефрактивный
+- В FRW (однородный фон): I_grad=0, поэтому J_refr=0 и рефрактивный
   сектор выключен без внешнего переключателя.
-- В strong-field (большие пространственные градиенты): `I_grad>0`, поэтому
-  преломляющий сектор включается напрямую через `F(J_refr)`.
-- Отдельного режимного поля `σ` в каноне нет; первичными остаются только
-  `Θ_{μν}` и `Ψ`.
+- В сильное поле (большие пространственные градиенты): I_grad>0, поэтому
+  преломляющий сектор включается напрямую через F(J_refr).
+- Отдельного режимного поля σ в каноне нет; первичными остаются только
+  Theta_munu и Psi.
 
-Индекс вакуума в solver-реализации записывается через регуляризованный отклик:
+Индекс вакуума в решатель-реализации записывается через регуляризованный отклик:
 
-```
-n(θ_eff,Θ,Ψ)=1+𝒩(J_refr),
-𝒩(0)=0,\; 𝒩'(J)>0,\; 𝒩(J) < ∞ \text{ на физической ветке}.
-```
-В solver-реализации может использоваться численный ограничитель интегратора,
+
+n(theta_eff,Theta,Psi)=1+𝒩(J_refr),
+𝒩(0)=0,; 𝒩'(J)>0,; 𝒩(J) < ∞  на физической ветке.
+
+В решатель-реализации может использоваться численный ограничитель интегратора,
 но он не является частью физической формулы.
 
 Невалидная ветка фона исключена параметризацией (а не фильтром):
 
-```
+
 A = 3 tanh^2( sqrt(A_raw/3) ) in [0,3),
 H^2 = (ρ_bg + V/2 + ρ_phase)/(3-A).
-```
+
 
 В сравнении с GR проверяется не «ручное включение», а динамический отклик
-`F(J_refr)`, возникающий из пространственных неоднородностей `Θ–Ψ`.
+F(J_refr), возникающий из пространственных неоднородностей Theta–Psi.
 
 Цель: описать сильнопольный режим так, чтобы из самих уравнений следовало:
 в модели не возникает истинный горизонт событий (как в стандартной ЧД),
@@ -63,21 +63,21 @@ H^2 = (ρ_bg + V/2 + ρ_phase)/(3-A).
 
 В оптической записи
 
-```
-dτ = dt / n(θ_eff),
-```
+
+dtau = dt / n(theta_eff),
+
 
 физически допустимые состояния удовлетворяют
 
-```
-1 ≤ n(θ_eff) < ∞.
-```
+
+1 ≤ n(theta_eff) < ∞.
+
 
 Каноническая конечная форма (рабочая в коде):
 
-```
-n(θ_eff,Θ,Ψ)=1+𝒩(J_refr).
-```
+
+n(theta_eff,Theta,Psi)=1+𝒩(J_refr).
+
 
 Это означает:
 - на физической ветке не возникает бесконечного redshift;
@@ -85,30 +85,28 @@ n(θ_eff,Θ,Ψ)=1+𝒩(J_refr).
 
 ## 2) Почему в этой модели нет горизонта событий
 
-Для эффективной метрики типа `ĝ` с положительным и конечным `n`:
+Для эффективной метрики типа g_hat с положительным и конечным n:
 - коэффициент временной части не обращается в ноль;
-- световые характеристики не теряют исходящую ветвь только из-за `n`.
+- световые характеристики не теряют исходящую ветвь только из-за n.
 
 Итог: в этой ветке не образуется горизонт событий. Свет с поверхности может
-выйти наружу, но при больших `n_surface` он будет экстремально красносмещён.
+выйти наружу, но при больших n_surface он будет экстремально красносмещён.
 
 Ключевой момент: отсутствие горизонта здесь получается не из внешнего
-физического потолка, а потому что физическая ветка не доходит до `n → ∞`.
-`n_guard` нужен только для устойчивости вычисления.
+физического потолка, а потому что физическая ветка не доходит до n → ∞.
+n_guard нужен только для устойчивости вычисления.
 
 ### 2.0) Статус закрытия stationary branch
 
 Стационарная compact branch считается закрытой в каноне только как набор
 проверяемых критериев, а не как словесный тезис. Кодовый источник:
 
-```text
-theory.micro_strongfield.strongfield_branch_closure_ledger()
-```
+theory.micro_strongfield.strongfield_branch_замыкание_реестр()
+
 
 Критерии:
 
-```text
-θ_eff > 0,
+theta_eff > 0,
 n finite,
 z_surface finite,
 delay finite,
@@ -116,93 +114,87 @@ outgoing characteristic exists,
 finite energy,
 regular center,
 elliptic radial operator.
-```
 
-Этот ledger также фиксирует forward map:
 
-```text
-n_profile -> z_surface -> delay -> ray/image map -> echo transfer.
-```
+Этот реестр также фиксирует прямой map:
+
+n_profi <= -> z_surface -> delay -> ray/ima >= map -> echo transfer.
+
 
 И явные условия отбраковки ветки:
 
-```text
-θ_eff -> 0,
+theta_eff -> 0,
 n -> infinity,
 energy -> infinity,
 loss of ellipticity,
 loss of outgoing characteristic,
-incompatible forward observables.
-```
+incompatib <= прямой наблюдаемые.
 
-Важно: это закрывает stationary strong-field branch. Динамический collapse
+
+Важно: это закрывает stationary сильное поле branch. Динамический collapse
 закрывается отдельным evolution contract:
 
-```text
-theory.micro_strongfield.dynamic_collapse_closure_ledger()
-```
+theory.micro_strongfield.dynamic_collapse_замыкание_реестр()
+
 
 Его критерии:
 
-```text
 finite-energy initial data,
-θ_eff(t,r) > 0,
+theta_eff(t,r) > 0,
 n(t,r) finite,
 E_total(t) finite,
 outgoing characteristic exists,
 hyperbolic evolution operator,
 no blow-up before branch decision.
-```
+
 
 Разрешённые исходы:
 
-```text
-settle to stationary branch,
-disperse to weak-field.
-```
+sett <= to stationary branch,
+disperse to слабое поле.
+
 
 Запрещённые исходы:
 
-```text
-θ_eff -> 0,
+theta_eff -> 0,
 n -> infinity,
 energy blow-up,
 loss of hyperbolicity,
 loss of outgoing characteristic.
-```
 
-Численный PDE-solver считается реализацией этого контракта, а не отдельным
+
+Численный PDE-решатель считается реализацией этого контракта, а не отдельным
 каноническим допущением.
 
 ### 2.1) Динамический критерий недостижимости предельного режима
 
 Однородный сектор содержит член
 
-```
-L_eff ⊃ (3/2) (θ̇/θ)^2,
-```
+
+L_eff ⊃ (3/2) (thetȧ/theta)^2,
+
 
 а значит в плотности энергии
 
-```
-ρ ⊃ (3/2) (θ̇/θ)^2.
-```
 
-Для любой траектории с конечной энергией `ρ(t) <= ρ_max < ∞`:
+ρ ⊃ (3/2) (thetȧ/theta)^2.
 
-```
-|d ln θ / dt| = |θ̇/θ| <= sqrt(2ρ_max/3) = K.
-```
+
+Для любой траектории с конечной энергией ρ(t) <= ρ_max < ∞:
+
+
+|d ln theta / dt| = |thetȧ/theta| <= sqrt(2ρ_max/3) = K.
+
 
 Интегрируя по времени:
 
-```
-ln θ(t) >= ln θ(t0) - K|t-t0|,
-θ(t) >= θ(t0) exp(-K|t-t0|) > 0  для любого конечного t.
-```
 
-Следовательно, `θ=0` не достигается за конечное время при конечной энергии.
-Если «истинный горизонт» требует предельного состояния `θ->0` (или эквивалентно
+ln theta(t) >= ln theta(t0) - K|t-t0|,
+theta(t) >= theta(t0) exp(-K|t-t0|) > 0  для любого конечного t.
+
+
+Следовательно, theta=0 не достигается за конечное время при конечной энергии.
+Если «истинный горизонт» требует предельного состояния theta->0 (или эквивалентно
 недостижимого предела причинной передачи), то такой горизонт не реализуется как
 физически достижимая поверхность. В модели остается асимптотический режим:
 очень большой redshift и большая задержка, но без строгой границы невозврата.
@@ -211,99 +203,99 @@ ln θ(t) >= ln θ(t0) - K|t-t0|,
 
 Для поверхности сверхкомпактного объекта:
 
-```
+
 1 + z_surface = n_surface / n_obs   < ∞,
-Δt = ∫_Γ n(θ_eff) dl < ∞.
-```
+Δt = ∫_Γ n(theta_eff) dl < ∞.
+
 
 В коде используются следующие индикаторы:
-- `n_surface`, `n_peak`;
-- `z_surface = n_surface / n_obs - 1` (в демонстрации `n_obs=1`);
-- `delay = Σ (n_i - n_obs)` по дискретизированной траектории.
+- n_surface, n_peak;
+- z_surface = n_surface / n_obs - 1 (в демонстрации n_obs=1);
+- delay = sum (n_i - n_obs) по дискретизированной траектории.
 
 ### 3.1) Что здесь считается primary
 
-Для теории основной strong-field эффект один: **конечный redshift при
+Для теории основной сильное поле эффект один: **конечный redshift при
 отсутствии истинного горизонта**. Практически это читается как связка
-`z_surface` + `delay` + `ok_no_horizon`.
+z_surface + delay + ok_no_horizon.
 
 Смысл этой связки:
-- `z_surface` растёт с компактностью, но остаётся конечным;
-- `delay` растёт вместе с тем же режимом;
-- `ok_no_horizon=True` фиксирует, что ветка не переходит в обычную ЧД-структуру.
+- z_surface растёт с компактностью, но остаётся конечным;
+- delay растёт вместе с тем же режимом;
+- ok_no_horizon=True фиксирует, что ветка не переходит в обычную ЧД-структуру.
 
-`ring_uas` и `echo_delay_ms` остаются downstream-проверками, а не отдельной
+ring_uas и echo_delay_ms остаются downstream-проверками, а не отдельной
 физической сущностью.
 
 ### Минимальный стационарный сферический сектор
 
-Для первого шага в сильном поле фиксируем радиальный профиль `θ(r)`:
+Для первого шага в сильном поле фиксируем радиальный профиль theta(r):
 
-```
-θ''(r) + (2/r) θ'(r) + ∂U/∂θ = 0,
-U(θ) = 1/2 m² θ² + 1/4 λ θ⁴,   m²>0, λ≥0.
-```
+
+theta''(r) + (2/r) theta'(r) + ∂U/∂theta = 0,
+U(theta) = 1/2 m² theta² + 1/4 λ theta⁴,   m²>0, λ≥0.
+
 
 Граничные условия:
 
-```
-θ(0)=θ_c,   θ'(0)=0,   θ(r→∞)→0.
-```
+
+theta(0)=theta_c,   theta'(0)=0,   theta(r→∞)→0.
+
 
 После решения ODE:
 
-```
-n(r)=n(θ(r)),
+
+n(r)=n(theta(r)),
 z_surface = n(0)-1,
-Δt = ∫_0^{r_max} (n(r)-1) dr.
-```
+Δt = ∫_0^r_max (n(r)-1) dr.
+
 
 ## 4) Вычислительная реализация
 
-- Ограниченный профиль индекса: `theory/optical_metric.py`
-  (`refractive_index_from_theta`, `n_bounds_ok`).
-- Проверка отсутствия горизонта: `checks/no_horizon.py`
-  (`no_horizon_from_n_values`, `no_horizon_from_theta`).
-- Общий блок отсечек: `checks/health.py`
-  (`check_n_bounds`, `check_no_horizon`).
-- Скан и отчёт: `scripts/run_grid_scan.py`, `checks/compact_report.py`.
-- Стационарный ODE-решатель: `checks/compact_star.py`.
-- Скан стационарного сектора: `scripts/run_compact_star_scan.py`.
-- Карта исключения (target-based): `scripts/run_compact_star_exclusion.py`.
-- `compact`-likelihood поддерживает два режима:
-  - `mode="gaussian"` (устаревший: симметричная точечная подгонка);
-  - `mode="constraints"` (основной: мягкие односторонние ограничения).
-- Скан информативности ограничений `mode="constraints"`:
-  `scripts/run_compact_constraint_scan.py` (доля разрешённой области и карта отсечения).
+- Ограниченный профиль индекса: theory/optical_metric.py
+  (refractive_index_from_theta, n_bounds_ok).
+- Проверка отсутствия горизонта: checks/no_horizon.py
+  (no_horizon_from_n_values, no_horizon_from_theta).
+- Общий блок отсечек: checks/health.py
+  (check_n_bounds, check_no_horizon).
+- Скан и отчёт: scripts/run_grid_скан.py, checks/compact_отчет.py.
+- Стационарный ODE-решатель: checks/compact_star.py.
+- Скан стационарного сектора: scripts/run_compact_star_скан.py.
+- Карта исключения (цель-based): scripts/run_compact_star_exclusion.py.
+- compact-likelihood поддерживает два режима:
+  - mode="gaussian" (устаревший: симметричная точечная подгонка);
+  - mode="constraints" (основной: мягкие односторонние ограничения).
+- Скан информативности ограничений mode="constraints":
+  scripts/run_compact_constraint_скан.py (доля разрешённой области и карта отсечения).
 
-## 4.1) Статус strong-field checks
+## 4.1) Статус сильное поле checks
 
-- Reference: public forward event report for M87*, Sgr A* and GWTC-3 echo-scale.
-- Diagnostic archive: conservative compact-bound scan from the EHT/LVK envelope.
+- Reference: public прямой event отчет for M87*, Sgr A* and GWTC-3 echo-scale.
+- Diagnostic archive: conservative compact-bound скан from the EHT/LVK envelope.
 - Public event-level comparator currently passes within the chosen tolerance.
-- Conservative compact-bound scan currently has no allowed points and stays archival.
+- Conservative compact-bound скан currently has no allowed points and stays архивный.
 
 ## 5) Что фальсифицирует ветку
 
 В этой постановке ветка отвергается, если одновременно требуется:
-- наблюдательно `z`/задержки, несовместимые с конечной физической веткой;
-- или динамика требует выхода за конечный профиль `n(θ_eff)`;
-- или полный likelihood (CC+SN+BAO+compact) не допускает области с `ok_no_horizon=True`.
+- наблюдательно z/задержки, несовместимые с конечной физической веткой;
+- или динамика требует выхода за конечный профиль n(theta_eff);
+- или полный likelihood (CC+SN+BAO+compact) не допускает области с ok_no_horizon=True.
 - или скан ограничений показывает пустую разрешённую область при физических
-  порогах для `z_surface`/задержек.
+  порогах для z_surface/задержек.
 
 Это превращает «безгоризонтную чёрную звезду» в проверяемую гипотезу, а не
 интерпретационный комментарий.
 
 ---
 
-## Приложение: реестр strong-field наблюдений и их трансляция в индикаторы
+## Приложение: реестр сильное поле наблюдений и их трансляция в индикаторы
 
-## 18. Реестр strong-field наблюдений: источники и перевод в индикаторы
+## Реестр сильное поле наблюдений и их трансляция в индикаторы
 
-Цель: зафиксировать, как наблюдательные strong-field результаты (EHT/LVK)
-сопоставляются с рабочими индикаторами `z_surface`, `delay`, `n_peak`
-в diagnostic-контуре Θ–Ψ.
+Цель: зафиксировать, как наблюдательные сильное поле результаты (EHT/LVK)
+сопоставляются с рабочими индикаторами z_surface, delay, n_peak
+в diagnostic-контуре Theta–Psi.
 
 ## 1) Источники
 
@@ -323,32 +315,32 @@ z_surface = n(0)-1,
 
 ## 2) Правило трансляции (текущая версия)
 
-Поскольку прямых публикационных интервалов именно для `z_surface`,
-`delay`, `n_peak` нет, применяется консервативная трансляция:
+Поскольку прямых публикационных интервалов именно для z_surface,
+delay, n_peak нет, применяется консервативная трансляция:
 
-- данные EHT -> нижние ограничения на `z_surface`;
-- данные LVK (no-echo) -> нижнее ограничение на `delay`;
-- EHT+LVK consistency envelope -> мягкий верхний предел `n_peak`.
+- данные EHT -> нижние ограничения на z_surface;
+- данные LVK (no-echo) -> нижнее ограничение на delay;
+- EHT+LVK consistency envelope -> мягкий верхний предел n_peak.
 
-Это диагностическое сопоставление, а не прямой fit observables-to-observables.
+Это диагностическое сопоставление, а не прямой fit наблюдаемые-to-наблюдаемые.
 Следовательно, эти ограничения не должны использоваться как автоматический
-PASS/FAIL-критерий `falsifiability`; их место — diagnostic scan и triage.
+PASS/FAIL-критерий falsifiability; их место — diagnostic скан и triage.
 
 ## 3) Текущие агрегированные ограничения
 
-Агрегация выполняется скриптом `scripts/run_build_compact_constraints_from_bounds.py`
+Агрегация выполняется скриптом scripts/run_build_compact_constraints_from_bounds.py
 по правилу:
 
-- для lower-bounds берется максимальный `value`,
-- для upper-bounds берется минимальный `value`.
+- для lower-bounds берется максимальный value,
+- для upper-bounds берется минимальный value.
 
 Текущий выходной файл:
 
-- `fitting/data/compact_constraints_observational_proxy.json` (archival diagnostic output).
+- fitting/data/compact_constraints_observational_proxy.json (архивный diagnostic output).
 
 ## 4) Что улучшать дальше
 
-- заменить inferred-преобразование на явную forward-модель
-  `model -> image/ring/GW-observable`;
+- заменить inferred-преобразование на явную прямой-модель
+  model -> image/ring/GW-observable;
 - добавить источники VLBI/GRAVITY и новые LVK каталоги;
 - к каждому entry добавить машиночитаемый mapping-id и формулу трансляции.
