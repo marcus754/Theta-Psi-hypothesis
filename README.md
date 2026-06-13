@@ -1,9 +1,5 @@
 # Θ-Ψ Hypothesis Repository
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.14856485.svg)](https://doi.org/10.5281/zenodo.14856485)
-
-**Публикация:** [The Θ–Ψ Hypothesis: A Field-Based Model for Emergent Gravity and Quantum Effects](https://zenodo.org/records/14856485)
-
 ## Сравнение предсказаний
 
 ### Таблица 1. Соответствие (слабое поле)
