@@ -1,4 +1,4 @@
-00. Theta–Psi Overview with formulas (v2)
+00. Theta–Psi Overview
 
 The file serves as a module map. It fixes only the basis of the hypothesis and the connections between layers:
 - core: what is assumed about time, gravity, and refractive response;
